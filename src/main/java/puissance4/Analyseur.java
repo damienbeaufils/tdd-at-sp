@@ -60,6 +60,10 @@ public class Analyseur {
                 grille.getJeton(indexLigne + (sensDeRechercheSurLaLigne * 3), indexColonne + (sensDeRechercheSurLaColonne * 3)).getCouleur() == couleurJetonDeDepart;
     }
 
+    public Grille getGrille() {
+        return grille;
+    }
+
     enum SensDeRecherche {
         EN_ARRIERE(-1),
         FIXE(0),
