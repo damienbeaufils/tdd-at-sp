@@ -120,28 +120,40 @@ public class GrilleTest {
         grille.addJeton(8, JAUNE);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentException_WhenGetJetonLigneZeroInvalide() throws Exception {
+    @Test
+    public void shouldReturnVide_WhenGetJetonLigneZeroInvalide() throws Exception {
         // When
-        grille.getJeton(0, 1);
+        Jeton jeton = grille.getJeton(0, 1);
+
+        // Then
+        assertThat(jeton.getCouleur()).isEqualTo(VIDE);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentException_WhenGetJetonLigneSeptInvalide() throws Exception {
+    @Test
+    public void shouldReturnVide_WhenGetJetonLigneSeptInvalide() throws Exception {
         // When
-        grille.getJeton(7, 1);
+        Jeton jeton = grille.getJeton(7, 1);
+
+        // Then
+        assertThat(jeton.getCouleur()).isEqualTo(VIDE);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentException_WhenGetJetonColonneZeroInvalide() throws Exception {
+    @Test
+    public void shouldReturnVide_WhenGetJetonColonneZeroInvalide() throws Exception {
         // When
-        grille.getJeton(1, 0);
+        Jeton jeton = grille.getJeton(1, 0);
+
+        // Then
+        assertThat(jeton.getCouleur()).isEqualTo(VIDE);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentException_WhenGetJetonColonneHuitInvalide() throws Exception {
+    @Test
+    public void shouldReturnVide_WhenGetJetonColonneHuitInvalide() throws Exception {
         // When
-        grille.getJeton(1, 8);
+        Jeton jeton = grille.getJeton(1, 8);
+
+        // Then
+        assertThat(jeton.getCouleur()).isEqualTo(VIDE);
     }
 
     @Test
@@ -163,5 +175,48 @@ public class GrilleTest {
         for (int indexColonne = 1; indexColonne <= grille.getNombreColonnes(); indexColonne++) {
             assertThat(grille.getJeton(1, indexColonne).getCouleur()).isEqualTo(VIDE);
         }
+    }
+
+    @Test
+    public void shouldAfficheGrilleVide() throws Exception {
+        // When
+        String affichage = grille.toString();
+
+        // Then
+        assertThat(affichage).isEqualTo(
+                ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n"
+        );
+    }
+
+    @Test
+    public void shouldAfficherGrillePleine() throws ColonnePleineException {
+        // Given
+        for (int indexColonne = 1; indexColonne <= grille.getNombreColonnes(); indexColonne++) {
+            grille.addJeton(indexColonne, ROUGE);
+            grille.addJeton(indexColonne, JAUNE);
+            grille.addJeton(indexColonne, ROUGE);
+            grille.addJeton(indexColonne, JAUNE);
+            grille.addJeton(indexColonne, JAUNE);
+            grille.addJeton(indexColonne, ROUGE);
+
+        }
+
+        // When
+        String affichage = grille.toString();
+
+        // Then
+        assertThat(affichage).isEqualTo(
+                        "R R R R R R R\n" +
+                        "J J J J J J J\n" +
+                        "J J J J J J J\n" +
+                        "R R R R R R R\n" +
+                        "J J J J J J J\n" +
+                        "R R R R R R R\n"
+        );
     }
 }

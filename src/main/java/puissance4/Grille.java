@@ -28,7 +28,7 @@ public class Grille {
 
     public Jeton getJeton(int ligne, int colonne) {
         if (isLigneInvalide(ligne) || isColonneInvalide(colonne)) {
-            throw new IllegalArgumentException();
+            return new Jeton(VIDE);
         }
         return jetons.get(colonne).get(ligne - 1);
     }
@@ -43,6 +43,26 @@ public class Grille {
 
     public int getNombreLignes() {
         return NOMBRE_LIGNES;
+    }
+
+    public String toString() {
+        String affichageGrille = "";
+        for (int indexLigne = 0; indexLigne < getNombreLignes(); indexLigne++) {
+            affichageGrille = afficherLigne(indexLigne) + affichageGrille;
+        }
+        return affichageGrille;
+    }
+
+    private String afficherLigne(int indexLigne) {
+        String ligne = "";
+        for (int indexColonne = 1; indexColonne <= getNombreColonnes(); indexColonne++) {
+            if (indexColonne > 1) {
+                ligne += " ";
+            }
+            ligne += jetons.get(indexColonne).get(indexLigne).getCouleur().getDisplay();
+        }
+        ligne += "\n";
+        return ligne;
     }
 
     private void initialiserNouvelleGrille() {
