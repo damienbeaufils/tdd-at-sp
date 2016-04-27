@@ -183,6 +183,41 @@ public class ArbitreTest {
         assertThat(coupPossible).isFalse();
     }
 
+    @Test
+    public void shouldReturnAffichageDeLaGrille() throws Exception {
+        // When
+        String result = arbitre.affichageGrille();
+
+        // Then
+        assertThat(result).isEqualTo(
+                ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n"
+        );
+    }
+
+    @Test
+    public void shouldReturnAffichageDeLaGrille_whenAffichageLigneNonGagnante() throws Exception {
+        //given
+        ajouterLigneNonGagnante();
+
+        // When
+        String result = arbitre.affichageGrille();
+
+        // Then
+        assertThat(result).isEqualTo(
+                ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        ". . . . . . .\n" +
+                        "J R J R J R J\n"
+        );
+    }
+
     private void ajouterLigneNonGagnante() throws ColonnePleineException {
         grille.addJeton(1, JAUNE);
         grille.addJeton(2, ROUGE);

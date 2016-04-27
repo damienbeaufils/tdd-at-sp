@@ -45,6 +45,7 @@ public class Grille {
         return NOMBRE_LIGNES;
     }
 
+    @Override
     public String toString() {
         String affichageGrille = "";
         for (int indexLigne = 0; indexLigne < getNombreLignes(); indexLigne++) {

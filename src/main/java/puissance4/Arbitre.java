@@ -18,7 +18,7 @@ public class Arbitre {
         return joueurCourant();
     }
 
-    public boolean joue(int numeroColonneAJouer) throws ColonnePleineException {
+    public boolean joue(int numeroColonneAJouer) {
         try {
             analyseur.getGrille().addJeton(numeroColonneAJouer, joueurCourant());
         } catch (IllegalArgumentException | ColonnePleineException e) {
@@ -49,7 +49,12 @@ public class Arbitre {
         return etatPartie;
     }
 
+    public String affichageGrille() {
+        return analyseur.getGrille().toString();
+    }
+
     private Couleur joueurCourant() {
         return nbCoupsJoues % 2 == 0 ? JAUNE : ROUGE;
     }
+
 }
